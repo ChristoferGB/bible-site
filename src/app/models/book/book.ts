@@ -1,4 +1,4 @@
-import { Abbrev } from "./abbrev";
+import { Abbrev } from "../abbrev/abbrev";
 
 export class Book {
     abbrev: Abbrev = new Abbrev;

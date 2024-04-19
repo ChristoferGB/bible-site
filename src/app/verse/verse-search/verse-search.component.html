@@ -1,0 +1,18 @@
+<mat-form-field>
+    <mat-label>Choose a book</mat-label>
+    <mat-select [(ngModel)]="selectedBook" (selectionChange)="getBookChapters()">
+        <mat-option *ngFor="let book of books" [value]="book">{{book.name}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Choose a chapter</mat-label>
+    <mat-select [(ngModel)]="selectedChapter" [disabled]="bookChapters.length === 0">
+        <mat-option *ngFor="let chapter of bookChapters" [value]="chapter">{{chapter}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<div>
+    <button (click)="getChapter()">Search</button>
+</div>
+<div *ngFor="let verse of verses">
+    <p>{{verse.number}}. {{verse.text}}</p>
+</div>
