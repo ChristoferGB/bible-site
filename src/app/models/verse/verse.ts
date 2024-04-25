@@ -1,4 +1,4 @@
-export class Verse {
-    number: number = 0;
-    text: string = "";
+export interface Verse {
+    number: number;
+    text: string;
 }

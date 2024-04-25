@@ -10,6 +10,12 @@
         <mat-option *ngFor="let chapter of bookChapters" [value]="chapter">{{chapter}}</mat-option>
     </mat-select>
 </mat-form-field>
+<mat-form-field>
+    <mat-label>Choose a version</mat-label>
+    <mat-select [(ngModel)]="selectedVersion">
+        <mat-option *ngFor="let version of versions" [value]="version.version">{{version.version}}</mat-option>
+    </mat-select>
+</mat-form-field>
 <div>
     <button (click)="getChapter()">Search</button>
 </div>

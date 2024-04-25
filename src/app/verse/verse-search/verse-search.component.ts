@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { VerseService } from '../verse.service';
 import { Book } from 'src/app/models/book/book';
-import { Abbrev } from 'src/app/models/abbrev/abbrev';
 import { Verse } from 'src/app/models/verse/verse';
+import { Version } from 'src/app/models/version/version';
 
 @Component({
   selector: 'app-verse-search',
@@ -13,14 +13,17 @@ export class VerseSearchComponent implements OnInit {
 
   books: Book[] = [];
   selectedBook: Book = new Book;
-  selectedChapter: number = 0;
+  versions: Version[] = [];
+  selectedVersion: string = '';
   bookChapters: number[] = [];
+  selectedChapter: number = 0;
   verses: Verse[] = [];
 
   constructor(private verseService: VerseService) { }
 
   ngOnInit(): void {
     this.getBooks();
+    this.getVersions();
   }
 
   getBooks(): void {
@@ -29,15 +32,20 @@ export class VerseSearchComponent implements OnInit {
     })
   }
 
+  getVersions(): void {
+    this.verseService.getVersions().subscribe(data => {
+      this.versions = data;
+    })
+  }
+
   getBookChapters() {
     this.bookChapters = Array.from({ length: this.selectedBook.chapters }, (_, i) => i + 1);
   }
 
   getChapter() {
-    this.verseService.getChapter("nvi", this.selectedBook.abbrev, this.selectedChapter).subscribe((data: any) => {
-      console.log(data);
-      this.verses = data.verses;
+    this.verseService.getChapter(this.selectedVersion, this.selectedBook.abbrev.pt, this.selectedChapter).subscribe(data => {
+      this.verses = data.verses
     })
-  } 
+  }
 
 }
