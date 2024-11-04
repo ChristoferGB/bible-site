@@ -17,7 +17,7 @@ export class UserService {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Access-Control-Allow-Origin', '*')
-      .set('Authorization', 'Bearer '+ token);
+      .set('Authorization', 'Bearer ' + token);
     
     return this.http.get<User>(this.apiUrl + 'users/' + email, {
       headers: headers
